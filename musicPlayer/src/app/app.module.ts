@@ -1,15 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { PlayerComponent } from './pages/player/player.component';
+import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
+const routes: Routes = [
+  { path: "", component: PlayerComponent },
+  { path: "**", redirectTo: "" }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PlayerComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })
