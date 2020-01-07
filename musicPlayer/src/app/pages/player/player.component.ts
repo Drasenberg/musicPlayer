@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StreamState } from 'src/app/interfaces/stream-state';
 import { AudioService } from 'src/app/services/audio.service';
 import { CloudService } from 'src/app/services/cloud.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-player',
@@ -16,6 +17,7 @@ export class PlayerComponent implements OnInit {
   public files = [];
   state: StreamState;
   currentFile: any = {};
+  repeat: boolean = false;
   constructor(
     public audioService: AudioService,
     public cloudService: CloudService
@@ -70,6 +72,20 @@ export class PlayerComponent implements OnInit {
 
   isLastPlaying() {
     return this.currentFile.index === this.files.length - 1;
+  }
+  onSliderChangeEnd(change) {
+    this.audioService.seekTo(change.value);
+  }
+
+  onRepeat(){
+    if(this.repeat === false){
+      this.repeat = true;
+      this.audioService.repeat(this.repeat);
+    }
+    else if (this.repeat === true){
+      this.repeat = false;
+      this.audioService.repeat(this.repeat);
+    }
   }
   
 }

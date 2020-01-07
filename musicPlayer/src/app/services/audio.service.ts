@@ -129,7 +129,9 @@ export class AudioService {
   pause() {
     this.audioObj.pause();
   }
-
+  repeat(isRepeat){
+    this.audioObj.loop = isRepeat;
+  }
   stop() {
     this.stop$.next();
   }

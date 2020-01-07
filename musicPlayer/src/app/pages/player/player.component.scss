@@ -1,9 +1,10 @@
 // src/app/pages/player/player.component.scss
 .container {
+    .player{
+      border-radius: 20px;
+    }
+
     .main-toolbar {
-      .spacer {
-        flex: 1 1 auto;
-      }
       .toolbar-btn {
         font-size: 16px;
         margin-right: 5px;
@@ -26,7 +27,7 @@
     }
   
     .media-footer {
-      position: absolute;
+      
       bottom: 0;
       width: 100%;
       .time-slider {

@@ -1,5 +1,7 @@
 <!-- src/app/pages/player/player.component.html -->
 <div class="container">
+  <div class="row h-100" >
+    <div class="col-xs-6">
     <mat-toolbar style="background-color: #723794; color: white;" class="main-toolbar">
       <span>Audio Player</span>
     </mat-toolbar>
@@ -8,17 +10,6 @@
           <mat-icon>music_note</mat-icon>
           <div>Audio Player</div>
       </div>
-      <mat-list style="background-color: #723794">
-        <h3 mat-subheader style="color: white;">Songs</h3>
-        <mat-list-item *ngFor="let file of files; let i = index" (click)="openFile(file, i)">
-          <mat-icon style="background-color: #723794" mat-list-icon>music_note</mat-icon>
-          <h4 mat-line style="color: white;">{{ file.name }}</h4>
-          <h5 mat-line style="color: white;">by {{ file.artist }}</h5>
-          <mat-icon style="color: white;" *ngIf="currentFile.index === i && !state?.error">volume_up</mat-icon>
-          <h6 *ngIf="currentFile.index === i && state?.error" style="color: white;">ERROR</h6>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </mat-list>
     </div>
     <div class="media-footer">
       <mat-toolbar style="background-color: #723794; color: white;">
@@ -28,6 +19,10 @@
            {{ state?.readableDuration }}
         </mat-toolbar-row>
         <mat-toolbar-row class="media-action-bar">
+          <button mat-button (click)="onRepeat()">
+            <mat-icon mat-list-icon *ngIf="!repeat">repeat</mat-icon>
+            <mat-icon mat-list-icon *ngIf="repeat" style="background-color: rgba(255,255,255,0.5);">repeat</mat-icon>
+          </button>
           <button mat-button [disabled]="isFirstPlaying()" (click)="previous()">
             <mat-icon mat-list-icon>skip_previous</mat-icon>
           </button>
@@ -39,8 +34,24 @@
           </button>
           <button  mat-button [disabled]="isLastPlaying()" (click)="next()">
             <mat-icon mat-list-icon>skip_next</mat-icon>
-          </button>
+          </button>         
         </mat-toolbar-row>
       </mat-toolbar>
+    </div>
+    </div>
+    <div class="col-xs-6"> 
+      <mat-list style="background-color: #723794">
+        <h3 mat-subheader style="color: white;">Songs</h3>
+        <mat-list-item *ngFor="let file of files; let i = index" (click)="openFile(file, i)">
+          <mat-icon style="background-color: #723794" mat-list-icon>music_note</mat-icon>
+          <h4 mat-line style="color: white;">{{ file.name }}</h4>
+          <h5 mat-line style="color: white;">by {{ file.artist }}</h5>
+          <mat-icon style="color: white;" *ngIf="currentFile.index === i && !state?.error">volume_up</mat-icon>
+          <h6 *ngIf="currentFile.index === i && state?.error" style="color: white;">ERROR</h6>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    
+    </div>
     </div>
 </div>
